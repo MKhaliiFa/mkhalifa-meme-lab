@@ -3,6 +3,15 @@
 # A failing commit is not installed (the running version stays). Public repo: no key needed.
 set -uo pipefail
 D=/opt/mkhalifa-meme-lab
+OUT=/opt/mkhalifa/data/meme          # the live bot reads this folder (its data disk); root copies into it
+mkdir -p "$OUT"
+# 1) hand the summary and a status note to the bot's daily report / dashboard (root: the lab user cannot
+#    enter /opt/mkhalifa, which holds the bot's secrets)
+[ -f "$D/data/summary.json" ] && cp -f "$D/data/summary.json" "$OUT/summary.json.tmp" && mv -f "$OUT/summary.json.tmp" "$OUT/summary.json"
+{ echo "status $(date -u +%FT%TZ): service $(systemctl is-active mkhalifa-meme-lab.service) · commit $(git -C "$D/repo" rev-parse --short HEAD)"
+  journalctl -u mkhalifa-meme-lab.service -n 12 --no-pager 2>/dev/null | cut -c1-200
+  [ -f "$D/data/check.txt" ] && cat "$D/data/check.txt"; } > "$OUT/install.log" 2>&1
+chmod 644 "$OUT"/* 2>/dev/null || true
 cd "$D/repo" || exit 1
 git fetch -q origin main || exit 0
 NEW=$(git rev-parse origin/main)
