@@ -52,7 +52,8 @@ Anything else is FAIL, and nothing with real money follows. A PASS only opens th
 ## Where to see it
 
 One block in the trading bot's 09:00 daily report on Telegram (no separate messages), and
-`/opt/mkhalifa/data/meme/summary.json` on the server. Raw samples of every source are kept in
+`/opt/mkhalifa-meme-lab/data/summary.json` on the server (copied every 5 minutes to the bot's
+`/opt/mkhalifa/data/meme/`, with a status note). Raw samples of every source are kept in
 `data/raw/` so the field mapping can be checked by a human.
 
 ## Server
