@@ -1,0 +1,10 @@
+[Unit]
+Description=MKhaliFa Meme Lab: look for a new commit every 5 minutes
+
+[Timer]
+OnBootSec=4min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

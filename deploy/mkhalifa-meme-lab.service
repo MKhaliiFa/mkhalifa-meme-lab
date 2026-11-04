@@ -1,0 +1,21 @@
+[Unit]
+Description=MKhaliFa Meme Lab (paper only, never trades)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=memelab
+WorkingDirectory=/opt/mkhalifa-meme-lab/repo
+EnvironmentFile=/opt/mkhalifa-meme-lab/repo/config.env
+ExecStart=/opt/mkhalifa-meme-lab/venv/bin/python -m memelab.main
+Restart=always
+RestartSec=20
+Nice=15
+MemoryMax=300M
+CPUQuota=40%
+NoNewPrivileges=true
+ProtectSystem=full
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=MKhaliFa Meme Lab: install a new commit (tests first)
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/mkhalifa-meme-lab/repo/deploy/update.sh
+Nice=15
